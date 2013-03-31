@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Game {
 
-  List<Player> players;
+  List<Player> players = new ArrayList<Player>();
   int indexCurrentPlayer = -1;
   Spinner spinner;
   boolean winner;
@@ -28,14 +28,13 @@ public class Game {
 
   public Game() {
     populateSpinner();
-    players = new ArrayList<Player>();
   }
 
   private void populateSpinner() {
-    Nuisance ants = Nuisance.createAgainstFood("Ants");
-    Nuisance blackFlies = Nuisance.create("Black Flies");
-    Nuisance sunburn = Nuisance.createAgainstFood("Sunburn");
-    Nuisance rain = Nuisance.createAgainstFood("Rain");
+    Nuisance ants = Nuisance.createAgainstFood("Ants");  // lose an item of food
+    Nuisance blackFlies = Nuisance.create("Black Flies");  // lose a turn
+    Nuisance sunburn = Nuisance.create("Sunburn");  // lose points at the end
+    Nuisance rain = Nuisance.create("Rain");  // picnic is cancelled
 
     ArrayList<SpinnerOption> choices = new ArrayList<SpinnerOption>();
     choices.add(Item.createFood("Hamburgers"));
@@ -52,8 +51,7 @@ public class Game {
     choices.add(Item.createDrink("Water"));
     choices.add(Item.createDrink("Soda"));
     choices.add(Item.createDrink("Juice Boxes"));
-    choices.add(Item.createUtensil("Plastic Forks"));
-    choices.add(Item.createUtensil("Plastic Spoons"));
+    choices.add(Item.createUtensil("Plastic Forks and Spoons"));
     choices.add(Item.createUtensil("Chopsticks"));
     choices.add(Item.createUtensil("Plates and Napkins"));
     choices.add(Item.createPrevention("Sunscreen", sunburn));
