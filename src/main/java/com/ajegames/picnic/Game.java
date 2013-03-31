@@ -32,9 +32,41 @@ public class Game {
   }
 
   private void populateSpinner() {
-    ArrayList<SpinnerOption> choices = new ArrayList<SpinnerOption>();
+    Nuisance ants = Nuisance.createAgainstFood("Ants");
+    Nuisance blackFlies = Nuisance.create("Black Flies");
+    Nuisance sunburn = Nuisance.createAgainstFood("Sunburn");
+    Nuisance rain = Nuisance.createAgainstFood("Rain");
 
-//    spinner = Spinner.createSpinner(choices.toArray());
+    ArrayList<SpinnerOption> choices = new ArrayList<SpinnerOption>();
+    choices.add(Item.createFood("Hamburgers"));
+    choices.add(Item.createFood("Sandwiches"));
+    choices.add(Item.createFood("Fried Chicken"));
+    choices.add(Item.createFood("Sushi"));
+    choices.add(Item.createFood("Potato Salad"));
+    choices.add(Item.createFood("Macaroni Salad"));
+    choices.add(Item.createFood("Potato Chips"));
+    choices.add(Item.createFood("Carrot Sticks"));
+    choices.add(Item.createFood("Fruit Salad"));
+    choices.add(Item.createFood("Watermelon"));
+    choices.add(Item.createFood("Brownies"));
+    choices.add(Item.createDrink("Water"));
+    choices.add(Item.createDrink("Soda"));
+    choices.add(Item.createDrink("Juice Boxes"));
+    choices.add(Item.createUtensil("Plastic Forks"));
+    choices.add(Item.createUtensil("Plastic Spoons"));
+    choices.add(Item.createUtensil("Chopsticks"));
+    choices.add(Item.createUtensil("Plates and Napkins"));
+    choices.add(Item.createPrevention("Sunscreen", sunburn));
+    choices.add(Item.createPrevention("Bug Spray", blackFlies));
+    choices.add(Item.createPrevention("Umbrella", rain));
+    choices.add(ants);
+    choices.add(ants);
+    choices.add(ants);
+    choices.add(ants);
+    choices.add(blackFlies);
+    choices.add(sunburn);
+    choices.add(rain);
+    spinner = Spinner.createSpinner(choices.toArray(new SpinnerOption[choices.size()]));
   }
 
   public void addPlayer(String playerName) {
