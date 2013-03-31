@@ -5,17 +5,17 @@ import java.util.Set;
 
 /**
  */
-public class PicnicPlayer {
+public class Player {
 
   private String name = "John Doe";
   Set<String> itemsGathered;
 
-  private PicnicPlayer() {
+  private Player() {
     itemsGathered = new HashSet<String>();
   }
 
-  public static PicnicPlayer createPlayer(String playerName) {
-    PicnicPlayer results = new PicnicPlayer();
+  public static Player createPlayer(String playerName) {
+    Player results = new Player();
     results.setName(playerName);
     return results;
   }

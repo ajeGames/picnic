@@ -1,15 +1,16 @@
 package com.ajegames.picnic;
 
 import com.ajegames.utility.Spinner;
+import com.ajegames.utility.SpinnerOption;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  */
-public class PicnicGame {
+public class Game {
 
-  List<PicnicPlayer> players;
+  List<Player> players;
   int indexCurrentPlayer = -1;
   Spinner spinner;
   boolean winner;
@@ -18,21 +19,26 @@ public class PicnicGame {
     if (args.length == 0) {
       throw new IllegalArgumentException("Need to specify the name of at least one player");
     }
-    PicnicGame game = new PicnicGame();
+    Game game = new Game();
     for (String player : args) {
       game.addPlayer(player);
     }
     game.play();
   }
 
-  public PicnicGame() {
-    spinner = Spinner.createSpinner(
-            new String[] {"Apple Pie", "BBQ Chicken", "Juice Box", "Sunscreen", "Rain", "Ants", "Umbrella"});
-    players = new ArrayList<PicnicPlayer>();
+  public Game() {
+    populateSpinner();
+    players = new ArrayList<Player>();
+  }
+
+  private void populateSpinner() {
+    ArrayList<SpinnerOption> choices = new ArrayList<SpinnerOption>();
+
+//    spinner = Spinner.createSpinner(choices.toArray());
   }
 
   public void addPlayer(String playerName) {
-    players.add(PicnicPlayer.createPlayer(playerName));
+    players.add(Player.createPlayer(playerName));
   }
 
   private void play() {
@@ -64,9 +70,9 @@ public class PicnicGame {
     spinner.spin();
 
     // do something about selection
-    PicnicPlayer currentPlayer = players.get(indexCurrentPlayer);
-    String selectedItem = spinner.getSelected();
-    currentPlayer.gatherItem(selectedItem);
+    Player currentPlayer = players.get(indexCurrentPlayer);
+    SpinnerOption selectedItem = spinner.getSelected();
+//    currentPlayer.gatherItem(selectedItem);
     print(currentPlayer.getName() + " got " + selectedItem + ".");
 
     // decide if winner

@@ -8,23 +8,21 @@ import java.util.List;
 public class Spinner {
 
   Randomizer randomSource;
-  List<String> choices = new ArrayList<String>();
+  List<SpinnerOption> choices = new ArrayList<SpinnerOption>();
   double lastSpin = 0.0f;
 
-  public static Spinner createSpinner(String[] choices) {
-    Spinner newSpinner = new Spinner(choices);
-    newSpinner.setRandomizer(new RandomNumberGenerator());
-    return newSpinner;
+  public static Spinner createSpinner(SpinnerOption[] choices) {
+    return createSpinner(choices, new RandomNumberGenerator());
   }
 
-  public static Spinner createSpinner(String[] choices, Randomizer randomizer){
+  public static Spinner createSpinner(SpinnerOption[] choices, Randomizer randomizer){
     Spinner newSpinner = new Spinner(choices);
     newSpinner.setRandomizer(randomizer);
     return newSpinner;
   }
 
-  private Spinner(String[] choices) {
-    for (String choice : choices) {
+  private Spinner(SpinnerOption[] choices) {
+    for (SpinnerOption choice : choices) {
       addChoice(choice);
     }
   }
@@ -33,7 +31,7 @@ public class Spinner {
     randomSource = randomizer;
   }
 
-  private void addChoice(String choice) {
+  private void addChoice(SpinnerOption choice) {
     choices.add(choice);
   }
 
@@ -45,7 +43,7 @@ public class Spinner {
     return choices.size();
   }
 
-  public String getSelected() {
+  public SpinnerOption getSelected() {
     int indexOfSelection = (int) Math.floor(lastSpin * choices.size());
     if (indexOfSelection == choices.size()) {
       indexOfSelection--;
