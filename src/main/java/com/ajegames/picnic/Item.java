@@ -1,18 +1,16 @@
 package com.ajegames.picnic;
 
-import com.ajegames.utility.SpinnerOption;
+import com.ajegames.utility.BaseSpinnerOption;
 
 /**
  * Something you collect in order to assemble a picnic and win.
  */
-public class Item implements SpinnerOption {
+public class Item extends BaseSpinnerOption {
 
-  private String name;
   private ItemType type;
-  private Nuisance counteracts;
 
-  private Item(String name, ItemType type) {
-    this.name = name;
+  protected Item(String name, ItemType type) {
+    super(name);
     this.type = type;
   }
 
@@ -32,16 +30,6 @@ public class Item implements SpinnerOption {
     return createPicnicItem(name, ItemType.UTENSIL);
   }
 
-  public static Item createPrevention(String name, Nuisance counteracts) {
-    Item item = createPicnicItem(name, ItemType.PREVENTION);
-    item.counteracts = counteracts;
-    return item;
-  }
-
-  public String getName() {
-    return name;
-  }
-
   public boolean isFood() {
     return type.equals(ItemType.FOOD);
   }
@@ -54,8 +42,9 @@ public class Item implements SpinnerOption {
     return type.equals(ItemType.UTENSIL);
   }
 
-  public boolean isPrevention() {
-    return type.equals(ItemType.PREVENTION);
+  public ItemType getType() {
+    return type;
   }
+
 
 }

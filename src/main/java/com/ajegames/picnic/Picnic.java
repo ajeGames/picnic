@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  */
-public class Game {
+public class Picnic {
 
   List<Player> players = new ArrayList<Player>();
   int indexCurrentPlayer = -1;
@@ -19,14 +19,14 @@ public class Game {
     if (args.length == 0) {
       throw new IllegalArgumentException("Need to specify the name of at least one player");
     }
-    Game game = new Game();
+    Picnic picnic = new Picnic();
     for (String player : args) {
-      game.addPlayer(player);
+      picnic.addPlayer(player);
     }
-    game.play();
+    picnic.play();
   }
 
-  public Game() {
+  public Picnic() {
     populateSpinner();
   }
 
@@ -54,9 +54,9 @@ public class Game {
     choices.add(Item.createUtensil("Plastic Forks and Spoons"));
     choices.add(Item.createUtensil("Chopsticks"));
     choices.add(Item.createUtensil("Plates and Napkins"));
-    choices.add(Item.createPrevention("Sunscreen", sunburn));
-    choices.add(Item.createPrevention("Bug Spray", blackFlies));
-    choices.add(Item.createPrevention("Umbrella", rain));
+    choices.add(Prevention.createPrevention("Sunscreen", sunburn));
+    choices.add(Prevention.createPrevention("Bug Spray", blackFlies));
+    choices.add(Prevention.createPrevention("Umbrella", rain));
     choices.add(ants);
     choices.add(ants);
     choices.add(ants);
@@ -106,7 +106,7 @@ public class Game {
     print(currentPlayer.getName() + " got " + selectedItem + ".");
 
     // decide if winner
-    if (currentPlayer.totalItems() == spinner.getNumberOfChoices()) {
+    if (currentPlayer.getItemCount() == spinner.getNumberOfChoices()) {
       winner = true;
     }
   }

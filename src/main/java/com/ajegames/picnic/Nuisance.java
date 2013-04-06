@@ -1,50 +1,68 @@
 package com.ajegames.picnic;
 
-import com.ajegames.utility.SpinnerOption;
+import com.ajegames.utility.BaseSpinnerOption;
 
 /**
+ * Things that work against the objective of having a picnic.
  */
-public class Nuisance implements SpinnerOption {
+public class Nuisance extends BaseSpinnerOption {
 
-  private String name = "No name";
-  Item worksAgainstItem;
-  ItemType worksAgainstAny;
+  private Item worksAgainst;
+  private ItemType worksAgainstType;
 
   private Nuisance(String name) {
-    this.name = name;
-  }
-
-  private Nuisance(String name, Item worksAgainstItem) {
-    this.name = name;
-    this.worksAgainstItem = worksAgainstItem;
-  }
-
-  private Nuisance(String name, ItemType worksAgainstAny) {
-    this.name = name;
-    this.worksAgainstAny = worksAgainstAny;
-  }
-
-  public String getName() {
-    return name;
+    super(name);
   }
 
   public static Nuisance create(String name) {
     return new Nuisance(name);
   }
 
-  public static Nuisance createAgainstItem(String name, Item worksAgainstItem) {
-    return new Nuisance(name, worksAgainstItem);
+  public static Nuisance createAgainstItem(String name, Item itemToCounteract) {
+    Nuisance newNuisance = new Nuisance(name);
+    newNuisance.setWorksAgainst(itemToCounteract);
+    return newNuisance;
   }
 
   public static Nuisance createAgainstFood(String name) {
-    return new Nuisance(name, ItemType.FOOD);
+    Nuisance newNuisance = new Nuisance(name);
+    newNuisance.setWorksAgainstType(ItemType.FOOD);
+    return newNuisance;
   }
 
   public static Nuisance createAgainstDrink(String name) {
-    return new Nuisance(name, ItemType.DRINK);
+    Nuisance newNuisance = new Nuisance(name);
+    newNuisance.setWorksAgainstType(ItemType.DRINK);
+    return newNuisance;
   }
 
   public static Nuisance createAgainstUtensil(String name) {
-    return new Nuisance(name, ItemType.UTENSIL);
+    Nuisance newNuisance = new Nuisance(name);
+    newNuisance.setWorksAgainstType(ItemType.UTENSIL);
+    return newNuisance;
+  }
+
+  private void setWorksAgainst(Item worksAgainst) {
+    this.worksAgainst = worksAgainst;
+  }
+
+  public Item getWorksAgainst() {
+    return worksAgainst;
+  }
+
+  private void setWorksAgainstType(ItemType worksAgainstType) {
+    this.worksAgainstType = worksAgainstType;
+  }
+
+  public ItemType getWorksAgainstType() {
+    return worksAgainstType;
+  }
+
+  public boolean isAgainstItem() {
+    return worksAgainst != null;
+  }
+
+  public boolean isAgainstItemType() {
+    return worksAgainstType != null;
   }
 }
