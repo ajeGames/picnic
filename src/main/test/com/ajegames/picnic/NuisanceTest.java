@@ -17,7 +17,7 @@ public class NuisanceTest extends TestCase {
     Nuisance newNuisance = Nuisance.createAgainstItem("heat wave", Item.createFood("ice cream"));
     assertTrue("should be specific", newNuisance.isAgainstItem());
     assertFalse(newNuisance.isAgainstItemType());
-    assertEquals("should work against ice cream", "ice cream", newNuisance.getWorksAgainst().getName());
+    assertEquals("should work against ice cream", "ice cream", newNuisance.getWorksAgainst().getValue());
   }
 
   public void testCreateNuisanceAgainstFood() {

@@ -5,6 +5,6 @@ package com.ajegames.utility;
  */
 public interface SpinnerOption {
 
-  public String getName();
+  public String getValue();
 
 }

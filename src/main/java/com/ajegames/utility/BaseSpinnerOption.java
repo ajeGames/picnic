@@ -13,7 +13,7 @@ public class BaseSpinnerOption implements SpinnerOption {
     this.name = name;
   }
 
-  public String getName() {
+  public String getValue() {
     return name;
   }
 }

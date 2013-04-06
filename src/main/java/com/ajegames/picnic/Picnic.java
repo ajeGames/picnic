@@ -7,6 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * <p>This is the game Picnic.  The objective is to gather a sufficient level of certain picnic items in order to have a
+ * successful picnic.  Players must gather at least 3 food items, 2 drink items and 2 utilities.  The first player
+ * to do so is the winner.  Special items are throw into the mix.  One kind is a nuisance, which is something that
+ * hinders the objective.  Another kind is a prevention, which neutralizes a nuisance.</p>
+ *
+ * <p>This set of rules lends itself to being completely computer driven.  That is, the game relies entirely on luck.
+ * Other versions of the rules may be coded in the future that require additional levels of skill.</p>
  */
 public class Picnic {
 
@@ -15,6 +22,12 @@ public class Picnic {
   Spinner spinner;
   boolean winner;
 
+  /**
+   * The game can be started and played from the command line.  Ultimately, this will be fronted by a Servlet and
+   * exposed as a web app.
+   *
+   * @param args Player names
+   */
   public static void main(String[] args) {
     if (args.length == 0) {
       throw new IllegalArgumentException("Need to specify the name of at least one player");
@@ -27,44 +40,7 @@ public class Picnic {
   }
 
   public Picnic() {
-    populateSpinner();
-  }
-
-  private void populateSpinner() {
-    Nuisance ants = Nuisance.createAgainstFood("Ants");  // lose an item of food
-    Nuisance blackFlies = Nuisance.create("Black Flies");  // lose a turn
-    Nuisance sunburn = Nuisance.create("Sunburn");  // lose points at the end
-    Nuisance rain = Nuisance.create("Rain");  // picnic is cancelled
-
-    ArrayList<SpinnerOption> choices = new ArrayList<SpinnerOption>();
-    choices.add(Item.createFood("Hamburgers"));
-    choices.add(Item.createFood("Sandwiches"));
-    choices.add(Item.createFood("Fried Chicken"));
-    choices.add(Item.createFood("Sushi"));
-    choices.add(Item.createFood("Potato Salad"));
-    choices.add(Item.createFood("Macaroni Salad"));
-    choices.add(Item.createFood("Potato Chips"));
-    choices.add(Item.createFood("Carrot Sticks"));
-    choices.add(Item.createFood("Fruit Salad"));
-    choices.add(Item.createFood("Watermelon"));
-    choices.add(Item.createFood("Brownies"));
-    choices.add(Item.createDrink("Water"));
-    choices.add(Item.createDrink("Soda"));
-    choices.add(Item.createDrink("Juice Boxes"));
-    choices.add(Item.createUtensil("Plastic Forks and Spoons"));
-    choices.add(Item.createUtensil("Chopsticks"));
-    choices.add(Item.createUtensil("Plates and Napkins"));
-    choices.add(Prevention.createPrevention("Sunscreen", sunburn));
-    choices.add(Prevention.createPrevention("Bug Spray", blackFlies));
-    choices.add(Prevention.createPrevention("Umbrella", rain));
-    choices.add(ants);
-    choices.add(ants);
-    choices.add(ants);
-    choices.add(ants);
-    choices.add(blackFlies);
-    choices.add(sunburn);
-    choices.add(rain);
-    spinner = Spinner.createSpinner(choices.toArray(new SpinnerOption[choices.size()]));
+    spinner = PicnicSpinner.createPicnicSpinnerWithDefaultOptions();
   }
 
   public void addPlayer(String playerName) {

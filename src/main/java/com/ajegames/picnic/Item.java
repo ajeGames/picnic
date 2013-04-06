@@ -18,7 +18,7 @@ public class Item extends BaseSpinnerOption {
     return new Item(name, type);
   }
 
-  public static Item createFood(String name) {
+  public static final Item createFood(String name) {
     return createPicnicItem(name, ItemType.FOOD);
   }
 
