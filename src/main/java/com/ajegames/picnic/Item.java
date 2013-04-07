@@ -50,5 +50,23 @@ public class Item extends BaseSpinnerOption {
     return type;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Item)) return false;
+    if (!super.equals(o)) return false;
 
+    Item item = (Item) o;
+
+    if (type != item.type) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = super.hashCode();
+    result = 31 * result + (type != null ? type.hashCode() : 0);
+    return result;
+  }
 }

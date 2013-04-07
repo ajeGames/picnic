@@ -115,4 +115,33 @@ public class PlayerTest extends TestCase {
     items = tester.getPreventions();
     assertTrue(items.contains(bugSpray));
   }
+
+  public void testRemoveItem() {
+    Player tester = genPlayer("Little Miss Sunshine");
+
+    Item peanuts = Item.createFood("peanuts");
+    Item popcorn = Item.createFood("popcorn");
+    tester.gatherItem(peanuts);
+    tester.gatherItem(popcorn);
+
+    // different instance but ought to be equivalent
+    Item peanutsTwin = Item.createFood("peanuts");
+    tester.removeItem(peanutsTwin);
+
+    assertFalse(tester.holdsItem(peanuts));
+    assertTrue(tester.holdsItem(popcorn));
+  }
+
+  public void testRemoveItemOfType() {
+    Player tester = genPlayer("Mr. Happy");
+    tester.gatherItem(Item.createFood("hot dogs"));
+    tester.gatherItem(Item.createFood("chicken"));
+    tester.gatherItem(Item.createFood("tacos"));
+    tester.gatherItem(Item.createFood("pizza"));
+    assertEquals(4, tester.getFoodCount());
+
+    tester.removeItemOfType(ItemType.FOOD);
+    assertEquals(3, tester.getFoodCount());
+    assertEquals(3, tester.getFoods().size());
+  }
 }

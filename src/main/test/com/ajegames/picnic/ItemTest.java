@@ -33,4 +33,15 @@ public class ItemTest extends TestCase {
     assertFalse(picnicItem.isDrink());
   }
 
+  public void testEquality() {
+    Item item1 = Item.createDrink("Dr. Pepper");
+    Item item2 = Item.createDrink("Dr. Pepper");
+    Item item3 = Item.createDrink("Mr. Pip");
+    Item item4 = Item.createFood("Mr. Pip");
+
+    assertEquals(item1, item1);
+    assertEquals(item1, item2);
+    assertFalse("these are not equal", item1.equals(item3));
+    assertFalse("different type", item3.equals(item4));
+  }
 }

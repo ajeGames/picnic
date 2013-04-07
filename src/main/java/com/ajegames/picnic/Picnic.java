@@ -40,6 +40,7 @@ public class Picnic {
     for (String player : args) {
       picnic.addPlayer(player);
     }
+
     picnic.play();
   }
 
@@ -48,16 +49,19 @@ public class Picnic {
   }
 
   public void addPlayer(String playerName) {
+    print("Adding player " + playerName + ".");
     players.add(Player.createPlayer(playerName));
   }
 
   private void play() {
     // take turn; continue until player wins
+    print("\nAnd here we go...");
+    print("\n==Play by play==");
     do {
       advanceCurrentPlayer();
       takeTurn();
     } while (!winner());
-    print("The winner is " + players.get(indexCurrentPlayer).getName());
+    print("\nThe winner is " + players.get(indexCurrentPlayer).getName() + "!!!\n");
   }
 
   public void advanceCurrentPlayer() {
@@ -78,20 +82,23 @@ public class Picnic {
 
     if (selectedItem instanceof Item) {
       currentPlayer.gatherItem((Item) selectedItem);
-      print(currentPlayer.toString());
     } else if (selectedItem instanceof Nuisance) {
       Nuisance aProblem = (Nuisance) selectedItem;
       if (!currentPlayer.hasPrevention(aProblem)) {
-        // TODO implement negative effects: skip turn, remove item of type, wipe out everything, out of game
-
-        print(currentPlayer.getName() + ": Do something dastardly due to " + aProblem.getValue());
+        if (aProblem.isAgainstItem()) {
+          currentPlayer.removeItem(aProblem.getWorksAgainst());
+        } else if (aProblem.isAgainstItemType()) {
+          currentPlayer.removeItemOfType(aProblem.getWorksAgainstType());
+        }
+        print("Do something dastardly to " + currentPlayer.getName() + " due to " + aProblem.getValue());
       }
     }
+    print(currentPlayer.toString());
 
     // decide if winner
-    if (currentPlayer.getFoodCount() == REQUIRED_FOOD_COUNT
-            && currentPlayer.getDrinkCount() == REQUIRED_DRINK_COUNT
-            && currentPlayer.getUtensilCount() == REQUIRED_UTENSIL_COUNT) {
+    if (currentPlayer.getFoodCount() >= REQUIRED_FOOD_COUNT
+            && currentPlayer.getDrinkCount() >= REQUIRED_DRINK_COUNT
+            && currentPlayer.getUtensilCount() >= REQUIRED_UTENSIL_COUNT) {
       winner = true;
     }
   }

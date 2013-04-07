@@ -18,7 +18,8 @@ public class PicnicSpinner extends Spinner {
   }
 
   private void initialize() {
-    Nuisance ants = Nuisance.createAgainstFood("Ants");  // lose an item of food
+    Nuisance ants = Nuisance.createAgainstFood("Ants");
+    Nuisance wind = Nuisance.createAgainstUtensil("Wind");
     Nuisance blackFlies = Nuisance.create("Black Flies");  // lose a turn
     Nuisance sunburn = Nuisance.create("Sunburn");  // lose points at the end
     Nuisance rain = Nuisance.create("Rain");  // picnic is cancelled
@@ -47,6 +48,7 @@ public class PicnicSpinner extends Spinner {
             .addNuisance(ants)
             .addNuisance(ants)
             .addNuisance(ants)
+            .addNuisance(wind)
             .addNuisance(blackFlies)
             .addNuisance(sunburn)
             .addNuisance(rain);

@@ -33,13 +33,11 @@ public class Player {
 
   public void gatherItem(Item item) {
     basket.add(item);
-    if (ItemType.FOOD.equals(item.getType())) {
-      foodCount++;
-    } else if (ItemType.DRINK.equals(item.getType())) {
-      drinkCount++;
-    } else if (ItemType.UTENSIL.equals(item.getType())) {
-      utensilCount++;
-    }
+    incrementCount(item);
+  }
+
+  public boolean holdsItem(Item item) {
+    return basket.contains(item);
   }
 
   public int getItemCount() {
@@ -109,6 +107,41 @@ public class Player {
     return false;
   }
 
+  public void removeItem(Item itemToRemove) {
+    basket.remove(itemToRemove);
+    decrementCount(itemToRemove);
+  }
+
+  public void removeItemOfType(ItemType type) {
+    for (Item itemInBasket : basket) {
+      if (type.equals(itemInBasket.getType())) {
+        basket.remove(itemInBasket);
+        decrementCount(itemInBasket);
+        return;
+      }
+    }
+  }
+
+  private void incrementCount(Item itemBeingAdded) {
+    if (itemBeingAdded.isFood()) {
+      foodCount++;
+    } else if (itemBeingAdded.isDrink()) {
+      drinkCount++;
+    } else if (itemBeingAdded.isUtensil()) {
+      utensilCount++;
+    }
+  }
+
+  private void decrementCount(Item itemBeingRemoved) {
+    if (itemBeingRemoved.isFood()) {
+      foodCount--;
+    } else if (itemBeingRemoved.isDrink()) {
+      drinkCount--;
+    } else if (itemBeingRemoved.isUtensil()) {
+      utensilCount--;
+    }
+  }
+
   @Override
   public String toString() {
     StringBuilder out = new StringBuilder();
@@ -133,4 +166,5 @@ public class Player {
     out.append(" }");
     return out.toString();
   }
+
 }
