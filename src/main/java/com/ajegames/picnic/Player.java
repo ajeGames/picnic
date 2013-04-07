@@ -58,6 +58,46 @@ public class Player {
     return utensilCount;
   }
 
+  public List<Item> getFoods() {
+    List<Item> foodItems = new ArrayList<Item>();
+    for (Item item : basket) {
+      if (item.isFood()) {
+        foodItems.add(item);
+      }
+    }
+    return foodItems;
+  }
+
+  public List<Item> getDrinks() {
+    List<Item> foodItems = new ArrayList<Item>();
+    for (Item item : basket) {
+      if (item.isDrink()) {
+        foodItems.add(item);
+      }
+    }
+    return foodItems;
+  }
+
+  public List<Item> getUtensils() {
+    List<Item> foodItems = new ArrayList<Item>();
+    for (Item item : basket) {
+      if (item.isUtensil()) {
+        foodItems.add(item);
+      }
+    }
+    return foodItems;
+  }
+
+  public List<Item> getPreventions() {
+    List<Item> foodItems = new ArrayList<Item>();
+    for (Item item : basket) {
+      if (item.isPrevention()) {
+        foodItems.add(item);
+      }
+    }
+    return foodItems;
+  }
+
   public boolean hasPrevention(Nuisance rain) {
     for (Item picnicItem : basket) {
       if (picnicItem instanceof Prevention) {
@@ -67,5 +107,30 @@ public class Player {
       }
     }
     return false;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder out = new StringBuilder();
+    out.append("Player ")
+            .append(name)
+            .append(" { food: ");
+    for (Item item : getFoods()) {
+      out.append(item.getValue()).append(", ");
+    }
+    out.append(" drinks: ");
+    for (Item item : getDrinks()) {
+      out.append(item.getValue()).append(", ");
+    }
+    out.append(" utensils: ");
+    for (Item item : getUtensils()) {
+      out.append(item.getValue()).append(", ");
+    }
+    out.append(" preventions: ");
+    for (Item item : getPreventions()) {
+      out.append(item.getValue()).append(", ");
+    }
+    out.append(" }");
+    return out.toString();
   }
 }

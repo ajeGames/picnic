@@ -13,20 +13,12 @@ public class Spinner {
   List<SpinnerOption> choices = new ArrayList<SpinnerOption>();
   double lastSpin = 0.0f;
 
-  public static Spinner createSpinner() {
-    return createSpinner(new RandomNumberGenerator());
+  public Spinner() {
+    setRandomizer(new RandomNumberGenerator());
   }
 
-  /**
-   * Provides opening for tests to fix the random number generation.
-   *
-   * @param randomizer
-   * @return
-   */
-  public static Spinner createSpinner(Randomizer randomizer){
-    Spinner newSpinner = new Spinner();
-    newSpinner.setRandomizer(randomizer);
-    return newSpinner;
+  public Spinner(Randomizer randomizer){
+    setRandomizer(randomizer);
   }
 
   private void setRandomizer(Randomizer randomizer) {

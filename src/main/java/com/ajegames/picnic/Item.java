@@ -42,6 +42,10 @@ public class Item extends BaseSpinnerOption {
     return type.equals(ItemType.UTENSIL);
   }
 
+  public boolean isPrevention() {
+    return false;
+  }
+
   public ItemType getType() {
     return type;
   }

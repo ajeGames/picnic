@@ -2,6 +2,8 @@ package com.ajegames.picnic;
 
 import junit.framework.TestCase;
 
+import java.util.List;
+
 /**
  * Makes sure that Player behaves as expected.  Player holds picnic items in a basket, so make sure collection and
  * inspection works.
@@ -77,5 +79,40 @@ public class PlayerTest extends TestCase {
     tester.gatherItem(Item.createDrink("sweet tea"));
     tester.gatherItem(Item.createFood("popcorn"));
     assertFalse("umbrella should prevent rain", tester.hasPrevention(rain));
+  }
+
+  public void testGetDifferentTypesOfItems() {
+    Player tester = genPlayer("Little Miss Sunshine");
+
+    Item peanuts = Item.createFood("peanuts");
+    Item popcorn = Item.createFood("popcorn");
+    Item icedTea = Item.createDrink("iced tea");
+    Item fruitJuice = Item.createDrink("fruit juice");
+    Item maiTais = Item.createDrink("mai tais");
+    Item napkins = Item.createUtensil("napkins");
+    Item bugSpray = Prevention.createPrevention("bug spray", Nuisance.create("bugs"));
+
+    tester.gatherItem(peanuts);
+    tester.gatherItem(popcorn);
+    tester.gatherItem(icedTea);
+    tester.gatherItem(fruitJuice);
+    tester.gatherItem(maiTais);
+    tester.gatherItem(napkins);
+    tester.gatherItem(bugSpray);
+
+    List<Item> items = tester.getFoods();
+    assertTrue(items.contains(peanuts));
+    assertTrue(items.contains(popcorn));
+
+    items = tester.getDrinks();
+    assertTrue(items.contains(icedTea));
+    assertTrue(items.contains(fruitJuice));
+    assertTrue(items.contains(maiTais));
+
+    items = tester.getUtensils();
+    assertTrue(items.contains(napkins));
+
+    items = tester.getPreventions();
+    assertTrue(items.contains(bugSpray));
   }
 }

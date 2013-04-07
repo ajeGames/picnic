@@ -7,21 +7,17 @@ import com.ajegames.utility.Spinner;
  */
 public class PicnicSpinner extends Spinner {
 
-  /**
-   * Creates a spinner without any options.  Useful for testing.
-   * @return
-   */
   public static PicnicSpinner createBlankSpinner() {
     return new PicnicSpinner();
   }
 
   public static PicnicSpinner createPicnicSpinnerWithDefaultOptions() {
     PicnicSpinner spinner = new PicnicSpinner();
-    spinner.init();
+    spinner.initialize();
     return spinner;
   }
 
-  private void init() {
+  private void initialize() {
     Nuisance ants = Nuisance.createAgainstFood("Ants");  // lose an item of food
     Nuisance blackFlies = Nuisance.create("Black Flies");  // lose a turn
     Nuisance sunburn = Nuisance.create("Sunburn");  // lose points at the end

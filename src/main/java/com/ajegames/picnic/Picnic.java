@@ -19,8 +19,12 @@ public class Picnic {
 
   List<Player> players = new ArrayList<Player>();
   int indexCurrentPlayer = -1;
-  Spinner spinner;
+  PicnicSpinner spinner;
   boolean winner;
+
+  private static final int REQUIRED_FOOD_COUNT = 3;
+  private static final int REQUIRED_DRINK_COUNT = 2;
+  private static final int REQUIRED_UTENSIL_COUNT = 1;
 
   /**
    * The game can be started and played from the command line.  Ultimately, this will be fronted by a Servlet and
@@ -56,15 +60,8 @@ public class Picnic {
     print("The winner is " + players.get(indexCurrentPlayer).getName());
   }
 
-  private void advanceCurrentPlayer() {
-    indexCurrentPlayer++;
-    if (indexCurrentPlayer >= players.size()) {
-      indexCurrentPlayer = 0;
-    }
-  }
-
-  private void print(String s) {
-    System.out.println(s);
+  public void advanceCurrentPlayer() {
+    indexCurrentPlayer = ++indexCurrentPlayer % players.size();
   }
 
   private boolean winner() {
@@ -78,12 +75,29 @@ public class Picnic {
     // do something about selection
     Player currentPlayer = players.get(indexCurrentPlayer);
     SpinnerOption selectedItem = spinner.getSelected();
-//    currentPlayer.gatherItem(selectedItem);
-    print(currentPlayer.getName() + " got " + selectedItem + ".");
+
+    if (selectedItem instanceof Item) {
+      currentPlayer.gatherItem((Item) selectedItem);
+      print(currentPlayer.toString());
+    } else if (selectedItem instanceof Nuisance) {
+      Nuisance aProblem = (Nuisance) selectedItem;
+      if (!currentPlayer.hasPrevention(aProblem)) {
+        // TODO implement negative effects: skip turn, remove item of type, wipe out everything, out of game
+
+        print(currentPlayer.getName() + ": Do something dastardly due to " + aProblem.getValue());
+      }
+    }
 
     // decide if winner
-    if (currentPlayer.getItemCount() == spinner.getNumberOfChoices()) {
+    if (currentPlayer.getFoodCount() == REQUIRED_FOOD_COUNT
+            && currentPlayer.getDrinkCount() == REQUIRED_DRINK_COUNT
+            && currentPlayer.getUtensilCount() == REQUIRED_UTENSIL_COUNT) {
       winner = true;
     }
   }
+
+  private void print(String s) {
+    System.out.println(s);
+  }
+
 }

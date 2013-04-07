@@ -21,7 +21,13 @@ public class Prevention extends Item {
     this.counteracts = counteracts;
   }
 
+  @Override
+  public boolean isPrevention() {
+    return true;
+  }
+
   public Nuisance getCounteracts() {
     return counteracts;
   }
+
 }
