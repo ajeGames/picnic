@@ -14,7 +14,14 @@ public class Player {
   private int utensilCount;
 
   private Player() {
+    emptyBasket();
+  }
+
+  private void emptyBasket() {
     basket = new ArrayList<Item>();
+    foodCount = 0;
+    drinkCount = 0;
+    utensilCount = 0;
   }
 
   public static Player createPlayer(String playerName) {
@@ -122,6 +129,10 @@ public class Player {
     }
   }
 
+  public void removeAllItems() {
+    emptyBasket();
+  }
+
   private void incrementCount(Item itemBeingAdded) {
     if (itemBeingAdded.isFood()) {
       foodCount++;
@@ -166,5 +177,4 @@ public class Player {
     out.append(" }");
     return out.toString();
   }
-
 }

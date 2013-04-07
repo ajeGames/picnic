@@ -82,18 +82,24 @@ public class Picnic {
 
     if (selectedItem instanceof Item) {
       currentPlayer.gatherItem((Item) selectedItem);
+
     } else if (selectedItem instanceof Nuisance) {
       Nuisance aProblem = (Nuisance) selectedItem;
       if (!currentPlayer.hasPrevention(aProblem)) {
+        print("==X Do something dastardly to " + currentPlayer.getName() + " due to " + aProblem.getValue());
+
         if (aProblem.isAgainstItem()) {
           currentPlayer.removeItem(aProblem.getWorksAgainst());
         } else if (aProblem.isAgainstItemType()) {
           currentPlayer.removeItemOfType(aProblem.getWorksAgainstType());
+        } else if (aProblem.isWipeOut()) {
+          currentPlayer.removeAllItems();
         }
-        print("Do something dastardly to " + currentPlayer.getName() + " due to " + aProblem.getValue());
+      } else {
+        print("==O Problem avoided because " + currentPlayer.getName() + " has the prevention for " + aProblem.getValue());
       }
     }
-    print(currentPlayer.toString());
+    print("* " + currentPlayer.toString());
 
     // decide if winner
     if (currentPlayer.getFoodCount() >= REQUIRED_FOOD_COUNT

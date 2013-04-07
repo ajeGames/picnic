@@ -9,6 +9,7 @@ public class Nuisance extends BaseSpinnerOption {
 
   private Item worksAgainst;
   private ItemType worksAgainstType;
+  private boolean wipeOut;
 
   private Nuisance(String name) {
     super(name);
@@ -16,6 +17,12 @@ public class Nuisance extends BaseSpinnerOption {
 
   public static Nuisance create(String name) {
     return new Nuisance(name);
+  }
+
+  public static Nuisance createWipeOut(String name) {
+    Nuisance newNuisance = create(name);
+    newNuisance.wipeOut = true;
+    return newNuisance;
   }
 
   public static Nuisance createAgainstItem(String name, Item itemToCounteract) {
@@ -64,5 +71,9 @@ public class Nuisance extends BaseSpinnerOption {
 
   public boolean isAgainstItemType() {
     return worksAgainstType != null;
+  }
+
+  public boolean isWipeOut() {
+    return wipeOut;
   }
 }

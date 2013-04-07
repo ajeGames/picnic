@@ -144,4 +144,22 @@ public class PlayerTest extends TestCase {
     assertEquals(3, tester.getFoodCount());
     assertEquals(3, tester.getFoods().size());
   }
+
+  public void testWipeOut() {
+    Player tester = genPlayer("Mr. Strong");
+    tester.gatherItem(Item.createFood("hot dogs"));
+    tester.gatherItem(Item.createFood("chicken"));
+    tester.gatherItem(Item.createDrink("milk tea"));
+    tester.gatherItem(Item.createUtensil("forks"));
+    tester.gatherItem(Prevention.createPrevention("bug spray", Nuisance.create("mosquitos")));
+    tester.removeAllItems();
+    assertEquals(0, tester.getItemCount());
+    assertEquals(0, tester.getUtensilCount());
+    assertEquals(0, tester.getFoodCount());
+    assertEquals(0, tester.getDrinkCount());
+    assertTrue(tester.getDrinks().isEmpty());
+    assertTrue(tester.getFoods().isEmpty());
+    assertTrue(tester.getUtensils().isEmpty());
+    assertTrue(tester.getPreventions().isEmpty());
+  }
 }

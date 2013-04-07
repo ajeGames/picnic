@@ -22,7 +22,7 @@ public class PicnicSpinner extends Spinner {
     Nuisance wind = Nuisance.createAgainstUtensil("Wind");
     Nuisance blackFlies = Nuisance.create("Black Flies");  // lose a turn
     Nuisance sunburn = Nuisance.create("Sunburn");  // lose points at the end
-    Nuisance rain = Nuisance.create("Rain");  // picnic is cancelled
+    Nuisance rain = Nuisance.createWipeOut("Rain");  // picnic is cancelled
 
     addItem(Item.createFood("Hamburgers"))
             .addItem(Item.createFood("Sandwiches"))
@@ -51,6 +51,8 @@ public class PicnicSpinner extends Spinner {
             .addNuisance(wind)
             .addNuisance(blackFlies)
             .addNuisance(sunburn)
+            .addNuisance(rain)
+            .addNuisance(rain)
             .addNuisance(rain);
   }
 
